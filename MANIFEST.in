@@ -1,0 +1,14 @@
+include *.md
+include pyproject.toml
+include pytest.ini
+recursive-include shared *.py
+recursive-include intake *.py
+recursive-include graph *.py
+recursive-include monitor *.py
+recursive-include resources *.py
+recursive-include finance *.py
+recursive-include compliance *.py
+recursive-include collab *.py
+recursive-include outputs *.py
+recursive-include tests *.py
+recursive-include examples *.json *.md

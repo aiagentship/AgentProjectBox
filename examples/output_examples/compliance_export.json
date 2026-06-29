@@ -1,0 +1,128 @@
+{
+  "export_type": "compliance",
+  "generated_at": "2026-05-04T01:30:00+00:00",
+  "export_id": "018fa3d2-0e1f-2a3b-4c5d-6e7f-8a9b0c1d2e3f",
+  "project": {
+    "id": "018fa3c8-5e1e-7b8c-9d2e-4f5a6b7c8d9e",
+    "title": "AI Agent SaaS Launch",
+    "status": "active",
+    "created_at": "2026-05-04T01:15:00+00:00",
+    "created_by": "system"
+  },
+  "audit_trail": [
+    {
+      "id": "018fa3d3-1a2b-3c4d-5e6f-7a8b-9c0d1e2f3a4b",
+      "timestamp": "2026-05-04T01:15:00+00:00",
+      "event_type": "project_action",
+      "actor": "system",
+      "action": "project_created",
+      "resource_type": "project",
+      "resource_id": "018fa3c8-5e1e-7b8c-9d2e-4f5a6b7c8d9e",
+      "details": {
+        "title": "AI Agent SaaS Launch"
+      },
+      "signature": "a1b2c3d4e5f6...",
+      "integrity": "verified"
+    },
+    {
+      "id": "018fa3d4-2b3c-4d5e-6f7a-8b9c-0d1e2f3a4b5c",
+      "timestamp": "2026-05-04T01:16:00+00:00",
+      "event_type": "task_action",
+      "actor": "system",
+      "action": "task_created",
+      "resource_type": "task",
+      "resource_id": "018fa3c9-1a2b-3c4d-5e6f-7a8b9c0d1e2f",
+      "details": {
+        "task_title": "Architecture design"
+      },
+      "signature": "b2c3d4e5f6a7...",
+      "integrity": "verified"
+    },
+    {
+      "id": "018fa3d5-3c4d-5e6f-7a8b-9c0d-1e2f-3a4b5c6d",
+      "timestamp": "2026-05-04T01:17:00+00:00",
+      "event_type": "task_action",
+      "actor": "agent-001",
+      "action": "task_assigned",
+      "resource_type": "task",
+      "resource_id": "018fa3c9-1a2b-3c4d-5e6f-7a8b9c0d1e2f",
+      "details": {
+        "assigned_to": "agent-001"
+      },
+      "before_state": {
+        "assigned_to": []
+      },
+      "after_state": {
+        "assigned_to": ["agent-001"]
+      },
+      "signature": "c3d4e5f6a7b8...",
+      "integrity": "verified"
+    },
+    {
+      "id": "018fa3d6-4d5e-6f7a-8b9c-0d1e-2f3a-4b5c6d7e",
+      "timestamp": "2026-05-04T01:25:00+00:00",
+      "event_type": "task_action",
+      "actor": "agent-001",
+      "action": "task_status_updated",
+      "resource_type": "task",
+      "resource_id": "018fa3c9-1a2b-3c4d-5e6f-7a8b9c0d1e2f",
+      "details": {
+        "old_status": "in-progress",
+        "new_status": "completed"
+      },
+      "before_state": {
+        "status": "in-progress"
+      },
+      "after_state": {
+        "status": "completed"
+      },
+      "signature": "d4e5f6a7b8c9...",
+      "integrity": "verified"
+    },
+    {
+      "id": "018fa3d7-5e6f-7a8b-9c0d-1e2f-3a4b-5c6d7e8f",
+      "timestamp": "2026-05-04T01:26:00+00:00",
+      "event_type": "access_control",
+      "actor": "agent-002",
+      "action": "access_granted",
+      "resource_type": "project",
+      "resource_id": "018fa3c8-5e1e-7b8c-9d2e-4f5a6b7c8d9e",
+      "details": {
+        "permission": "project:read",
+        "granted": true
+      },
+      "signature": "e5f6a7b8c9d0...",
+      "integrity": "verified"
+    },
+    {
+      "id": "018fa3d8-6f7a-8b9c-0d1e-2f3a-4b5c-6d7e-8f9a",
+      "timestamp": "2026-05-04T01:28:00+00:00",
+      "event_type": "finance_action",
+      "actor": "system",
+      "action": "budget_initialized",
+      "resource_type": "budget",
+      "resource_id": "018fa3c8-5e1e-7b8c-9d2e-4f5a6b7c8d9e",
+      "details": {
+        "allocated": 50000.00,
+        "currency": "USD"
+      },
+      "signature": "f6a7b8c9d0e1...",
+      "integrity": "verified"
+    }
+  ],
+  "checksum": "a1b2c3d4e5f6a7b8",
+  "retention_until": "2033-05-04T01:30:00+00:00",
+  "compliance_info": {
+    "standard": "SOC2-Type2",
+    "tamper_proof": true,
+    "chain_verified": true,
+    "last_verified": "2026-05-04T01:30:00+00:00",
+    "total_events": 6,
+    "event_breakdown": {
+      "project_action": 1,
+      "task_action": 3,
+      "access_control": 1,
+      "finance_action": 1
+    }
+  }
+}

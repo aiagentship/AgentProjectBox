@@ -1,0 +1,168 @@
+{
+  "version": "1.0.0",
+  "report_type": "full_export",
+  "generated_at": "2026-05-04T01:30:00+00:00",
+  "project": {
+    "project_id": "018fa3c8-5e1e-7b8c-9d2e-4f5a6b7c8d9e",
+    "title": "AI Agent SaaS Launch",
+    "description": "A comprehensive SaaS platform for AI agents with core modules, documentation, and launch campaign",
+    "status": "active",
+    "priority": "HIGH",
+    "created_at": "2026-05-04T01:15:00+00:00",
+    "updated_at": "2026-05-04T01:25:00+00:00",
+    "objectives": [
+      "Build MVP core modules",
+      "Complete beta release for internal testing",
+      "Launch market test campaign"
+    ],
+    "deliverables": [
+      "Core modules",
+      "API documentation",
+      "User guides",
+      "Launch campaign"
+    ],
+    "constraints": [
+      "Must be production-ready by Q3 2026",
+      "Tech stack: Python, FastAPI, PostgreSQL"
+    ],
+    "assumptions": [
+      "Team will have 3 full-time developers",
+      "No major scope changes during MVP phase"
+    ],
+    "timeline": {
+      "start_date": "2026-05-05T00:00:00+00:00",
+      "due_date": "2026-06-15T23:59:59+00:00",
+      "on_time_probability": 0.72,
+      "expected_completion": "2026-06-20T18:00:00+00:00",
+      "risk_factors": [
+        "resource overload",
+        "budget drift",
+        "integration complexity"
+      ]
+    },
+    "budget": {
+      "allocated": 50000.00,
+      "spent": 12000.00,
+      "remaining": 38000.00,
+      "currency": "USD",
+      "burn_rate": "moderate"
+    },
+    "task_graph": [
+      {
+        "task_id": "018fa3c9-1a2b-3c4d-5e6f-7a8b9c0d1e2f",
+        "title": "Architecture design",
+        "status": "completed",
+        "priority": "HIGH",
+        "assigned_to": ["agent-001"],
+        "depends_on": [],
+        "estimated_hours": 16.0,
+        "actual_hours": 14.0
+      },
+      {
+        "task_id": "018fa3ca-2b3c-4d5e-6f7a-8b9c0d1e2f3a",
+        "title": "Core modules",
+        "status": "in-progress",
+        "priority": "CRITICAL",
+        "assigned_to": ["agent-002", "agent-003"],
+        "depends_on": ["018fa3c9-1a2b-3c4d-5e6f-7a8b9c0d1e2f"],
+        "estimated_hours": 120.0,
+        "actual_hours": 48.0
+      },
+      {
+        "task_id": "018fa3cb-3c4d-5e6f-7a8b-9c0d1e2f3a4b",
+        "title": "Testing suite",
+        "status": "pending",
+        "priority": "HIGH",
+        "assigned_to": ["agent-004"],
+        "depends_on": ["018fa3ca-2b3c-4d5e-6f7a-8b9c0d1e2f3a"],
+        "estimated_hours": 32.0,
+        "actual_hours": 0.0
+      },
+      {
+        "task_id": "018fa3cc-4d5e-6f7a-8b9c-0d1e2f3a4b5c",
+        "title": "Docs",
+        "status": "pending",
+        "priority": "MEDIUM",
+        "assigned_to": [],
+        "depends_on": ["018fa3ca-2b3c-4d5e-6f7a-8b9c0d1e2f3a"],
+        "estimated_hours": 24.0,
+        "actual_hours": 0.0
+      },
+      {
+        "task_id": "018fa3cd-5e6f-7a8b-9c0d-1e2f3a4b5c6d",
+        "title": "Launch campaign",
+        "status": "pending",
+        "priority": "HIGH",
+        "assigned_to": ["agent-005"],
+        "depends_on": ["018fa3cb-3c4d-5e6f-7a8b-9c0d1e2f3a4b", "018fa3cc-4d5e-6f7a-8b9c-0d1e2f3a4b5c"],
+        "estimated_hours": 40.0,
+        "actual_hours": 0.0
+      }
+    ],
+    "risks": [
+      {
+        "id": "018fa3ce-6f7a-8b9c-0d1e-2f3a4b5c6d7e",
+        "category": "resource",
+        "description": "Team capacity may be insufficient for sprint commitments",
+        "probability": 0.6,
+        "impact": 0.7,
+        "risk_score": 0.42,
+        "status": "open",
+        "mitigation": "Prioritize critical tasks; consider contractor support"
+      },
+      {
+        "id": "018fa3cf-7a8b-9c0d-1e2f-3a4b5c6d7e8f",
+        "category": "timeline",
+        "description": "Integration testing may reveal architectural issues",
+        "probability": 0.4,
+        "impact": 0.8,
+        "risk_score": 0.32,
+        "status": "open",
+        "mitigation": "Early proof-of-concept integration spike"
+      }
+    ],
+    "team": [
+      "agent-001",
+      "agent-002",
+      "agent-003",
+      "agent-004",
+      "agent-005"
+    ],
+    "stakeholders": [
+      "stakeholder-001",
+      "stakeholder-002"
+    ],
+    "progress": {
+      "completion_percent": 18.5,
+      "total_tasks": 5,
+      "completed_tasks": 1
+    }
+  },
+  "alerts": [
+    {
+      "id": "018fa3d0-8b9c-0d1e-2f3a-4b5c6d7e8f9a",
+      "severity": "warning",
+      "category": "timeline",
+      "message": "Docs task at risk due to dependency delay",
+      "project_id": "018fa3c8-5e1e-7b8c-9d2e-4f5a6b7c8d9e",
+      "task_id": "018fa3cc-4d5e-6f7a-8b9c-0d1e2f3a4b5c",
+      "created_at": "2026-05-04T01:20:00+00:00",
+      "acknowledged_by": null,
+      "acknowledged_at": null
+    },
+    {
+      "id": "018fa3d1-9c0d-1e2f-3a4b-5c6d7e8f9a0b",
+      "severity": "info",
+      "category": "resource",
+      "message": "Agent-005 allocated to launch campaign",
+      "project_id": "018fa3c8-5e1e-7b8c-9d2e-4f5a6b7c8d9e",
+      "task_id": null,
+      "created_at": "2026-05-04T01:18:00+00:00"
+    }
+  ],
+  "audit_event": {
+    "event": "report_generated",
+    "actor": "system",
+    "timestamp": "2026-05-04T01:30:00+00:00"
+  }
+}

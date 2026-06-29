@@ -1,0 +1,92 @@
+{
+  "text": "Daily Project Digest",
+  "blocks": [
+    {
+      "type": "header",
+      "text": {
+        "type": "plain_text",
+        "text": ":chart_with_upwards_trend: Daily Project Digest"
+      }
+    },
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": "*3* active projects • *2* warnings • *0* critical"
+      }
+    },
+    {
+      "type": "divider"
+    },
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": ":yellow_circle: *1 Project At Risk*"
+      }
+    },
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": "• *AI Agent SaaS Launch* - 72% on-time probability"
+      }
+    },
+    {
+      "type": "divider"
+    },
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": ":warning: *Active Warnings*"
+      }
+    },
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": "• Docs task at risk due to dependency delay"
+      }
+    },
+    {
+      "type": "section",
+      "fields": [
+        {
+          "type": "mrkdwn",
+          "text": "*Budget Status:*\n$12,000 / $50,000 (24%)"
+        },
+        {
+          "type": "mrkdwn",
+          "text": "*Burn Rate:*\nModerate"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "fields": [
+        {
+          "type": "mrkdwn",
+          "text": "*Tasks Completed:*\n1 of 5 (20%)"
+        },
+        {
+          "type": "mrkdwn",
+          "text": "*Days Remaining:*\n42 days"
+        }
+      ]
+    },
+    {
+      "type": "actions",
+      "elements": [
+        {
+          "type": "button",
+          "text": {
+            "type": "plain_text",
+            "text": "View Dashboard"
+          },
+          "url": "https://api.agentprojectbox.ai/projects/018fa3c8-5e1e-7b8c-9d2e-4f5a6b7c8d9e"
+        }
+      ]
+    }
+  ]
+}
