@@ -6,8 +6,10 @@ import re
 from datetime import datetime, timedelta
 from typing import Any
 
+from pydantic import BaseModel, Field, ConfigDict
+
 from shared.models import (
-    Project, Task, Timeline, Priority, ProjectStatus, TaskStatus, Risk
+    Project, Task, Timeline, Priority, ProjectStatus, TaskStatus, Risk, ValidationResult
 )
 from shared.utils import generate_id, timestamp_now, parse_duration
 

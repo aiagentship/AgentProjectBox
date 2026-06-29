@@ -7,6 +7,14 @@ from .builder import (
     DependencyEdge,
     TaskNode,
 )
+from .templates import (
+    detect_project_type,
+    get_templates_for_type,
+    generate_tasks_from_template,
+    suggest_tasks_from_description,
+    TASK_TEMPLATES,
+    PROJECT_TYPE_KEYWORDS,
+)
 
 __all__ = [
     "DAGBuilder",
@@ -14,4 +22,10 @@ __all__ = [
     "TaskGraphEngine",
     "DependencyEdge",
     "TaskNode",
+    "detect_project_type",
+    "get_templates_for_type",
+    "generate_tasks_from_template",
+    "suggest_tasks_from_description",
+    "TASK_TEMPLATES",
+    "PROJECT_TYPE_KEYWORDS",
 ]

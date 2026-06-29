@@ -57,12 +57,18 @@ class AgentCapability(str, Enum):
     CODE_REVIEW = "code_review"
     TESTING = "testing"
     INFRASTRUCTURE = "infrastructure"
+    DEVOPS = "devops"
     DESIGN = "design"
     WRITING = "writing"
     ANALYSIS = "analysis"
     PROJECT_MANAGEMENT = "project_management"
     SECURITY = "security"
     COMPLIANCE = "compliance"
+    FRONTEND_DEVELOPMENT = "frontend_development"
+    UI_DESIGN = "ui_design"
+    API_DESIGN = "api_design"
+    DATA_ENGINEERING = "data_engineering"
+    ML_ENGINEERING = "ml_engineering"
 
 
 class ValidationResult(BaseModel):

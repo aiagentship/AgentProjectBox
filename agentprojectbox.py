@@ -5,6 +5,7 @@ from __future__ import annotations
 import asyncio
 from datetime import datetime, timedelta
 from typing import Any
+import os
 
 from shared.models import (
     Project, Task, Agent, ProjectStatus, TaskStatus, Priority,
@@ -12,6 +13,7 @@ from shared.models import (
 )
 from shared.utils import timestamp_now, generate_id
 from shared.config import config
+from shared.persistence import PersistenceLayer
 
 from intake import IntakeLayer
 from graph import TaskGraphEngine
@@ -29,8 +31,28 @@ class Orchestrator:
     Coordinates all modules and provides high-level operations.
     """
     
-    def __init__(self, swarm_mode: bool = False):
+    def __init__(self, swarm_mode: bool = False, persist: bool = True, data_dir: str | None = None):
+        """
+        Initialize orchestrator.
+        
+        Args:
+            swarm_mode: Enable multi-project coordination
+            persist: Enable persistence to disk (default: True)
+            data_dir: Directory for data storage (default: ~/.agentprojectbox)
+        """
         self.swarm_mode = swarm_mode
+        self.persist = persist
+        
+        # Initialize state FIRST
+        self.projects: dict[str, Project] = {}
+        self.agents: dict[str, Agent] = {}
+        
+        # Initialize persistence layer
+        if persist:
+            self.persistence = PersistenceLayer(data_dir=data_dir)
+            self._load_state()
+        else:
+            self.persistence = None
         
         # Initialize all layers
         self.intake = IntakeLayer()
@@ -42,9 +64,6 @@ class Orchestrator:
         self.collab = CollaborationLayer()
         self.output = OutputLayer(config.notifications.slack_webhook_url)
         
-        # State
-        self.projects: dict[str, Project] = {}
-        self.agents: dict[str, Agent] = {}
         self._initialized = True
     
     # -------------------------------------------------------------------------
@@ -104,6 +123,10 @@ class Orchestrator:
         if project.deliverables:
             self._auto_generate_tasks(project)
         
+        # Persist if enabled
+        if self.persist:
+            self.persistence.save_project(project)
+        
         # Log creation
         self.compliance.audit.log_project_event(
             project, created_by, "project_created",
@@ -144,6 +167,10 @@ class Orchestrator:
         # Update graph
         self.graph.build_from_project(project)
         
+        # Persist
+        if self.persist:
+            self.persistence.save_project(project)
+        
         # Log
         self.compliance.audit.log_task_event(task, "system", "task_created")
         
@@ -173,6 +200,10 @@ class Orchestrator:
             task.actual_start = timestamp_now()
         elif task.status == TaskStatus.COMPLETED and not task.actual_end:
             task.actual_end = timestamp_now()
+        
+        # Persist
+        if self.persist:
+            self.persistence.save_project(project)
         
         # Log
         self.compliance.audit.log_task_event(
@@ -273,6 +304,10 @@ class Orchestrator:
         
         # Register with collaboration
         self.collab.connect_agent(agent)
+        
+        # Persist
+        if self.persist:
+            self.persistence.save_agent(agent)
         
         return agent
     
@@ -448,20 +483,27 @@ class Orchestrator:
     # -------------------------------------------------------------------------
     
     def _auto_generate_tasks(self, project: Project) -> None:
-        """Auto-generate tasks from deliverables."""
-        for deliverable in project.deliverables:
-            # Suggest tasks using knowledge graph
-            suggestions = self.graph.knowledge.suggest_task_breakdown(
-                deliverable, deliverable
+        """Auto-generate tasks from deliverables using templates."""
+        from graph import suggest_tasks_from_description
+        from shared.models import TaskStatus
+        
+        # Combine project info for better detection
+        project_text = f"{project.title} {' '.join(project.deliverables)} {' '.join(project.objectives)}"
+        
+        # Get suggested tasks based on project type
+        suggested_tasks = suggest_tasks_from_description(project_text)
+        
+        # Add tasks to project
+        for task_data in suggested_tasks:
+            task = Task(
+                title=task_data.get("title", "Unnamed Task"),
+                description=task_data.get("description", ""),
+                priority=task_data.get("priority", Priority.MEDIUM),
+                estimated_hours=task_data.get("estimated_hours", 8.0),
+                tags=task_data.get("tags", []),
+                status=TaskStatus.PENDING,
             )
-            
-            for suggestion in suggestions:
-                task = Task(
-                    title=suggestion.get("title", f"Complete {deliverable}"),
-                    priority=project.priority,
-                    status=TaskStatus.PENDING,
-                )
-                project.tasks.append(task)
+            project.tasks.append(task)
     
     def get_health_summary(self) -> dict[str, Any]:
         """Get system health summary."""
@@ -471,4 +513,42 @@ class Orchestrator:
             "swarm_mode": self.swarm_mode,
             "audit_events": len(self.compliance.audit.events),
             "uptime": "active",
+            "persistence": "enabled" if self.persist else "disabled",
         }
+    
+    def _load_state(self) -> None:
+        """Load state from persistence layer."""
+        if not self.persistence:
+            return
+        
+        # Load projects
+        for project in self.persistence.list_projects():
+            self.projects[project.id] = project
+        
+        # Load agents
+        for agent in self.persistence.list_agents():
+            self.agents[agent.id] = agent
+    
+    def backup(self, output_path: str) -> None:
+        """Create a backup of all data."""
+        if not self.persistence:
+            raise ValueError("Persistence is disabled")
+        
+        self.persistence.export_backup(output_path)
+    
+    def restore(self, backup_path: str) -> dict[str, int]:
+        """Restore from a backup file."""
+        if not self.persistence:
+            raise ValueError("Persistence is disabled")
+        
+        # Clear current state
+        self.projects.clear()
+        self.agents.clear()
+        
+        # Import backup
+        counts = self.persistence.import_backup(backup_path)
+        
+        # Reload state
+        self._load_state()
+        
+        return counts

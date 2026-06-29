@@ -18,6 +18,7 @@ from .models import (
 )
 from .utils import generate_id, timestamp_now, ensure_timezone
 from .config import config
+from .persistence import PersistenceLayer
 
 __all__ = [
     "Project",
@@ -38,4 +39,5 @@ __all__ = [
     "timestamp_now",
     "ensure_timezone",
     "config",
+    "PersistenceLayer",
 ]

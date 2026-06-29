@@ -58,7 +58,7 @@ Repository = "https://github.com/factory/AgentProjectBox"
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["intake*", "graph*", "monitor*", "resources*", "finance*", "compliance*", "collab*", "outputs*"]
+include = ["agentprojectbox*", "intake*", "graph*", "monitor*", "resources*", "finance*", "compliance*", "collab*", "outputs*", "shared*"]
 
 [tool.black]
 line-length = 100
